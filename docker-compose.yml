@@ -1,0 +1,44 @@
+version: '3'
+
+# This Compose File is for Development Purposes.
+# To use the Production Version of the Image read the Readme!
+
+services:
+
+  https-portal:
+    image: steveltn/https-portal:1
+    container_name: Homepage_SSLProxy
+    ports:
+      - '80:80'
+      - '443:443'
+    links:
+      - wordpress
+    restart: always
+    environment:
+      DOMAINS: 'fsmpi.uni-bayreuth.de -> http://wordpress'
+      STAGE: local
+      # STAGE: 'production'
+      # FORCE_RENEW: 'true'
+
+  wordpress:
+    image: wordpress
+    container_name: Homepage
+    links:
+      - database:mysql
+    ports:
+      - 8080:80
+    volumes:
+      - ./src:/var/www/html/wp-content/themes/fs-theme
+      - ./wp-config-sample.php:/var/www/html/wp-config-sample.php
+    depends_on:
+      - database
+    restart: unless-stopped
+
+  database:
+    image: mariadb
+    container_name: Homepage_Database
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_DATABASE=wordpress
