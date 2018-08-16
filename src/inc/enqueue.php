@@ -8,18 +8,18 @@
  *
 */
 
-/*function fs_load_admin_scripts( $hook ){
+function fs_load_admin_scripts( $hook ){
 
-        wp_register_style( 'fs_admin', get_template_directory_uri() . '/css/fs.admin.css', array(), '1.0.0', 'all' );
+        wp_register_style( 'fs_admin', get_template_directory_uri() . '/assets/css/fs-admin.css', array(), '1.0.0', 'all' );
         wp_enqueue_style( 'fs_admin' );
 
         wp_enqueue_media();
 
-        wp_register_script( 'fs-admin-script', get_template_directory_uri() . '/js/fs.admin.js', array('jquery'), '1.0.0', true );
+        wp_register_script( 'fs-admin-script', get_template_directory_uri() . '/assets/js/fs-admin.js', array('jquery'), '1.0.0', true );
         wp_enqueue_script( 'fs-admin-script' );
 
 }
-add_action( 'admin_enqueue_scripts', 'fs_load_admin_scripts' );*/
+add_action( 'admin_enqueue_scripts', 'fs_load_admin_scripts' );
 
 
 
