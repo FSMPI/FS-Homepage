@@ -1,13 +1,16 @@
 <?php
-/*
 
-@package fstheme
-
-	========================
-		REMOVE GENERATOR VERSION NUMBER
-	========================
+/* @package fstheme
+ *
+ * ========================
+ * REMOVE GENERATOR VERSION NUMBER
+ * ========================
+ *
 */
-/* remove version string from js and css */
+
+
+// remove version string from js and css
+
 function fs_remove_wp_version_strings( $src ) {
 
     global $wp_version;
@@ -20,7 +23,11 @@ function fs_remove_wp_version_strings( $src ) {
 }
 add_filter( 'script_loader_src', 'fs_remove_wp_version_strings' );
 add_filter( 'style_loader_src', 'fs_remove_wp_version_strings' );
-/* remove metatag generator from header */
+
+
+
+// remove metatag generator from header
+
 function fs_remove_meta_version() {
     return '';
 }

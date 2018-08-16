@@ -1,12 +1,13 @@
 <?php
-/*
 
-@package sunsettheme
-
-	========================
-		ADMIN ENQUEUE FUNCTIONS
-	========================
+/* @package fstheme
+ *
+ * =======================
+ * ADMIN ENQUEUE FUNCTIONS
+ * =======================
+ *
 */
+
 /*function fs_load_admin_scripts( $hook ){
 
         wp_register_style( 'fs_admin', get_template_directory_uri() . '/css/fs.admin.css', array(), '1.0.0', 'all' );
@@ -22,14 +23,14 @@ add_action( 'admin_enqueue_scripts', 'fs_load_admin_scripts' );*/
 
 
 
-/*
-
-@package sunsettheme
-
-	========================
-		FRONTEND ENQUEUE FUNCTIONS
-	========================
+/* @package fstheme
+ *
+ * ==========================
+ * FRONTEND ENQUEUE FUNCTIONS
+ * ==========================
+ *
 */
+
 function fs_load_scripts(){
     wp_enqueue_script('material', get_template_directory_uri() . '/assets/js/material-components-web.js' );
     wp_enqueue_style( 'mdc-web-style', get_template_directory_uri() . '/assets/css/material-components-web.css' );
