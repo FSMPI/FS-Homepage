@@ -28,8 +28,8 @@ services:
     ports:
       - 8080:80
     volumes:
-      - ./src:/var/www/html/wp-content/themes/fs-theme
-      - ./wp-config-sample.php:/var/www/html/wp-config-sample.php
+      - ./src:/var/www/html/wp-content/themes/fstheme
+      - ./configs/wp-config-sample.php:/var/www/html/wp-config-sample.php
     depends_on:
       - database
     restart: unless-stopped
@@ -42,3 +42,17 @@ services:
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
       - MYSQL_DATABASE=wordpress
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: Homepage_phpmyadmin
+    links:
+    - database:db
+    ports:
+    - 8181:80
+    depends_on:
+    - database
+    restart: unless-stopped
+    environment:
+      MYSQL_USERNAME: root
+      MYSQL_ROOT_PASSWORD: example
