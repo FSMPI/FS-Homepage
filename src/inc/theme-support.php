@@ -46,6 +46,25 @@ function fs_register_nav_menu() {
 add_action('init', 'fs_register_nav_menu');
 
 
+function fs_register_default_pages() {
+
+
+    // Set Permalink to /%year%/%monthnum%/%postname%/
+    // -------------------------------------------------
+    if(get_option('permalink_structure') != '/%year%/%monthnum%/%postname%/') {
+        global $wp_rewrite;
+        $wp_rewrite->set_permalink_structure('/%year%/%monthnum%/%postname%/');
+        update_option( "rewrite_rules", FALSE );
+        $wp_rewrite->flush_rules( true );
+    }
+
+
+
+
+}
+add_action('init', 'fs_register_default_pages');
+
+
 /*
 function fs_theme_setup() {
 
