@@ -34,13 +34,13 @@ add_action( 'admin_enqueue_scripts', 'fs_load_admin_scripts' );
 function fs_load_scripts(){
     wp_enqueue_script('material', get_template_directory_uri() . '/assets/js/material-components-web.js' );
     wp_enqueue_style( 'mdc-web-style', get_template_directory_uri() . '/assets/css/material-components-web.css' );
-    wp_enqueue_style('fs', get_template_directory_uri() . 'assets/css/fs.css', array(), '1.0.0', 'all');
+    wp_enqueue_style('fs', get_template_directory_uri() . '/assets/css/fs.css', array(), '1.0.0', 'all');
 
     wp_enqueue_style('dashicons');
 
 
     wp_deregister_script( 'jquery' );
-    wp_register_script( 'jquery' , get_template_directory_uri() . 'assets/js/jquery-3.3.1.min.js', false, '3.3.1', true );
+    wp_register_script( 'jquery' , get_template_directory_uri() . '/assets/js/jquery-3.3.1.min.js', false, '3.3.1', true );
     wp_enqueue_script( 'jquery' );
 
     // Move jquery to the footer
@@ -48,11 +48,11 @@ function fs_load_scripts(){
     wp_scripts()->add_data( 'jquery-core', 'group', 1 );
     wp_scripts()->add_data( 'jquery-migrate', 'group', 1 );
 
-    wp_enqueue_script('jquery-ui', get_template_directory_uri() . 'assets/js/jquery-ui.js');
+    wp_enqueue_script('jquery-ui', get_template_directory_uri() . '/assets/js/jquery-ui.js');
 
-    wp_enqueue_script('scrollTo', get_template_directory_uri() . 'assets/js/jquery.scrollTo.js' );
+    wp_enqueue_script('scrollTo', get_template_directory_uri() . '/assets/js/jquery.scrollTo.js' );
     wp_scripts()->add_data('scrollTo', 'group', 1);
-    wp_enqueue_script('watch', get_template_directory_uri() . 'assets/js/watch.js' );
+    wp_enqueue_script('watch', get_template_directory_uri() . '/assets/js/watch.js' );
     wp_scripts()->add_data('watch', 'group', 1);
     //wp_enqueue_script('material-icons', get_template_directory_uri() . '/js/material-icons.js' );
     //wp_scripts()->add_data('material-icons', 'group', 1);
@@ -68,9 +68,8 @@ function mdc_autoinit(){
 }
 add_action('wp_footer', 'mdc_autoinit');
 
-/*
+
 function fs_login_stylesheet() {
-    wp_enqueue_style( 'fs-login', get_template_directory_uri() . 'assets/css/fs-login.css' );
+    wp_enqueue_style( 'fs-login', get_template_directory_uri() . '/assets/css/fs-login.css' );
 }
 add_action( 'login_enqueue_scripts', 'fs_login_stylesheet' );
-*/

@@ -1,0 +1,25 @@
+#login h1 a, .login h1 a {
+  background-image: url("../img/tross_orange.png");
+  height: 200px;
+  width: 200px;
+  background-size: 200px 200px;
+  background-repeat: no-repeat;
+  padding-bottom: 30px; }
+
+body {
+  background-image: url("../img/bg-content.png");
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center center; }
+
+a:hover {
+  color: orange; }
+
+#loginform {
+  background-color: rgba(255, 255, 255, 0.25); }
+
+#loginform label {
+  color: #3d3d3d; }
+
+/*# sourceMappingURL=fs-login.css.map */
