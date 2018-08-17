@@ -1,0 +1,33 @@
+/*
+ *  -- Mixins
+ */
+
+@mixin respond-to($media) {
+  @if $media == desktop {
+    @media only screen and (min-width: $break-desktop) and (orientation: landscape) { @content; }
+  }
+  @else if $media == ipad-pro {
+    @media only screen and (min-width: 1024px) and (orientation: portrait) { @content; }
+  }
+  @else if $media == tablet-landscape {
+    @media only screen and (min-width: $break-tablet-landscape) and (orientation: landscape) { @content; }
+  }
+  @else if $media == tablet-portrait {
+    @media  only screen and (min-width: $break-tablet-portrait) and (orientation: portrait) { @content; }
+  }
+  @else if $media == phone-portrait {
+    @media only screen and (max-width: $break-phone-portrait) and (orientation: portrait) { @content; }
+  }
+  @else if $media == phone-landscape {
+    @media only screen and (max-width: $break-phone-landscape) and (orientation: landscape) { @content; }
+  }
+}
+
+
+/*
+$break-desktop: 1281px;
+$break-tablet-landscape: 1024px;
+$break-tablet-portrait: 768px;
+$break-phone-landscape: 823px;
+$break-phone-portrait: 414px;
+ */
