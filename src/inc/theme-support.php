@@ -16,16 +16,39 @@ add_action('after_setup_theme', 'remove_admin_bar');
 
 
 function fs_register_nav_menu() {
+
+    /*
     register_nav_menus(
         array(
             'header-menu' => __('Header Menu'),
             'extra-menu' => __('Extra Menu')
         )
     );
+    */
 
     $menu_exists = wp_get_nav_menu_object( 'Header Menu' );
     if( !$menu_exists) {
+        register_nav_menu('header-menu', __('Header Menu'));
         $menu_id = wp_create_nav_menu('FS Theme Header Menu');
+        //var_dump($menu_id);
+
+        wp_update_nav_menu_item($menu_id, 0, array(
+                'menu-item-title' => 'News',
+                'menu-item-object-id' => get_page_by_title('News')->ID,
+                'menu-item-classes' => 'account_circle',
+                'menu-item-object' => 'page',
+                'menu-item-status' => 'publish',
+                'menu-item-type' => 'post_type')
+        );
+
+        wp_update_nav_menu_item($menu_id, 0, array(
+                'menu-item-title' => 'Aktive Vertreter',
+                'menu-item-object-id' => get_page_by_title('Aktive Vertreter')->ID,
+                'menu-item-classes' => 'account_circle',
+                'menu-item-object' => 'page',
+                'menu-item-status' => 'publish',
+                'menu-item-type' => 'post_type')
+        );
 
         wp_update_nav_menu_item($menu_id, 0, array(
             'menu-item-title' =>  __('Login'),
@@ -47,6 +70,9 @@ add_action('init', 'fs_register_nav_menu');
 
 
 function fs_register_default_pages() {
+
+    $menu = get_term_by('name', 'Header Menu', 'nav_menu')->term_id;
+    //var_dump($menu);
 
 
     // Set Permalink to /%year%/%monthnum%/%postname%/
@@ -116,9 +142,32 @@ EOT;
 
             // Set this Site as default Blog page
             update_option( 'page_for_posts ', $id );
+
         }
     }
 
+
+    // Generate Aktive-Vertreter Page
+    // ------------------------------
+    if(get_page_by_title('Aktive Vertreter') == NULL || get_page_by_title('Aktive Vertreter')->post_status == 'trash') {
+        $id = wp_insert_post(array(
+            'post_title'     => 'Aktive Vertreter',
+            'post_name'      => 'Aktive Vertreter',
+            'post_content'   => '',
+            'post_status'    => 'publish',
+            'post_author'    => '1', // or "1" (super-admin?)
+            'post_type'      => 'page',
+            'menu_order'     => 1,
+            'comment_status' => 'closed',
+            'ping_status'    => 'closed'
+        ));
+
+        if($id == 0 || $id instanceof WP_Error) {
+            echo '<script>alert("Fehler: '.$id.'");</script>';
+        } else {
+
+        }
+    }
 
 
 }

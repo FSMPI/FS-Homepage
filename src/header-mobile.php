@@ -59,7 +59,7 @@
 <header id="header" class="mdc-toolbar mdc-toolbar--fixed">
     <div class="mdc-toolbar__row mdc-toolbar__row-default">
         <section class="mdc-toolbar__section logo_section mdc-toolbar__section--align-start">
-            <a href="<?php get_home_url(); ?>"><div id="logo" class="mdc-toolbar__logo" style="background-image: url('<?php bloginfo('template_url') ?>/img/tross.svg'); background-size: contain; background-repeat: no-repeat;">
+            <a href="<?php get_home_url(); ?>"><div id="logo" class="mdc-toolbar__logo" style="background-image: url('<?php bloginfo('template_url') ?>/assets/img/tross.svg'); background-size: contain; background-repeat: no-repeat;">
 
                 </div></a>
             <span class="mdc-toolbar__title">Fachschaft MPI</span>
