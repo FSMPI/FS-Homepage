@@ -56,8 +56,8 @@ function fs_load_scripts(){
     wp_scripts()->add_data('watch', 'group', 1);
     //wp_enqueue_script('material-icons', get_template_directory_uri() . '/js/material-icons.js' );
     //wp_scripts()->add_data('material-icons', 'group', 1);
-    //wp_enqueue_script('header', get_template_directory_uri() . 'assets/js/header.js' );
-    //wp_scripts()->add_data('header', 'group', 1);
+    wp_enqueue_script('header', get_template_directory_uri() . '/assets/js/header.js' );
+    wp_scripts()->add_data('header', 'group', 1);
 }
 add_action('wp_enqueue_scripts', 'fs_load_scripts');
 

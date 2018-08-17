@@ -1,1 +1,224 @@
 @import "colors";
+@import "animations";
+@import "mixins";
+@import "header";
+
+
+$break-desktop: 1281px;
+$break-tablet-landscape: 1024px;
+$break-tablet-portrait: 768px;
+$break-phone-landscape: 823px;
+$break-phone-portrait: 414px;
+
+
+
+
+/*
+ *  -- Theme Options
+ */
+:root {
+
+
+  @each $name, $color in $colors {
+    --mdc-theme-#{$name}: #{$color};
+  }
+
+  /*
+  --mdc-theme-primary: $mdc-theme-primary;
+  --mdc-theme-secondary: $mdc-theme-secondary;
+  --mdc-theme-background: $mdc-theme-background;
+*/
+  /*
+  --mdc-theme-primary-light: ;
+  --mdc-theme-primary-dark: ;
+
+  --mdc-theme-secondary-light: ;
+  --mdc-theme-secondary-dark: ;
+
+  --mdc-theme-text-primary-on-background: ;
+  --mdc-theme-text-primary-on-dark: ;
+  --mdc-theme-text-primary-on-light: ;
+  --mdc-theme-text-secondary-on-background: ;
+  --mdc-theme-text-secondary-on-dark: ;
+  --mdc-theme-text-secondary-on-light: ;
+  --mdc-theme-text-hint-on-background: ;
+  --mdc-theme-text-hint-on-dark: ;
+  --mdc-theme-text-hint-on-light: ;
+  --mdc-theme-text-disabled-on-background: ;
+  --mdc-theme-text-disabled-on-dark: ;
+  --mdc-theme-text-disabled-on-light: ;
+  --mdc-theme-text-icon-on-background: ;
+  --mdc-theme-text-icon-on-dark: ;
+  --mdc-theme-text-icon-on-light: ;
+  */
+}
+
+
+/*
+ *  -- Global Styles
+ */
+
+i {
+  display: block;
+}
+
+
+body {
+  height: 100%;
+  margin: 0;
+
+  .background{
+    background-image: url("../img/bg-content.png");
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center center;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+  }
+
+  .background-unikino {
+    background-color: #000000;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+  }
+}
+
+
+
+/*
+ *  -- Main Styles
+ */
+.mdc-toolbar-fixed-adjust {
+  //margin-top: 100vh;
+
+  #content {
+    //height: 100vh;
+    height: calc(100vh - 65px);
+    width: 100%;
+    display: flex;
+    //display: -webkit-box;
+    display: -ms-flexbox;
+
+    .mdc-layout-grid {
+      display: flex;
+      //display: -webkit-box;
+      display: -ms-flexbox;
+      padding-top: 25px;
+      width: 100%;
+
+      .mdc-layout-grid__inner {
+        width: 100%;
+
+        @include respond-to(desktop) {
+          margin: auto;
+          .offset_cell {
+            display: none;
+            &:first-of-type {
+              display: block;
+            }
+          }
+          .mdc-layout-grid__cell {
+            height: 100%;
+          }
+        }
+        @include respond-to(ipad-pro) {
+          margin: auto !important;
+          .offset_cell_ipad-pro {
+            display: block !important;
+          }
+        }
+        @include respond-to(tablet-portrait) {
+          margin: 0 auto auto auto;
+        }
+        @include respond-to(tablet-landscape) {
+          margin: auto;
+          .offset_cell {
+            display: none;
+            &:first-of-type {
+              display: block;
+            }
+          }
+          .mdc-layout-grid__cell {
+            height: 100%;
+          }
+        }
+        @include respond-to(phone-portrait) {
+          margin: 0 auto auto auto;
+          .offset_cell {
+            display: none;
+          }
+        }
+        @include respond-to(phone-landscape) {
+          margin: 0 auto auto auto;
+        }
+
+
+        .mdc-card {
+          margin: 0;
+
+          display: flex;
+          //display: -webkit-box;
+          display: -ms-flexbox;
+          flex-direction: column;
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+          background-color: rgba(255, 255, 255, 0.25);
+          //width: 475px;
+          //height: 336px;
+
+          h2 {
+            padding-left: 16px;
+            padding-right: 16px;
+          }
+
+          p {
+            padding-left: 16px;
+            padding-right: 16px;
+          }
+
+          .mdc-card__actions {
+            margin-top: auto;
+            padding-bottom: 16px;
+            justify-content: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+          }
+
+          .mdc-card__media {
+            display: flex;
+            display: -ms-flexbox;
+            justify-content: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            align-items: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            margin: auto;
+          }
+        }
+      }
+
+      .mdc-layout-grid__cell {
+        align-self: center;
+        -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        margin: auto;
+
+
+      }
+    }
+  }
+}

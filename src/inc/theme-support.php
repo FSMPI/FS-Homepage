@@ -59,6 +59,66 @@ function fs_register_default_pages() {
     }
 
 
+    // Generate Home-Page and set is as default Frontpage
+    // --------------------------------------------------
+    $content = <<<EOT
+Der alberne Troß der Universität Bayreuth begrüßt dich recht herzlich. Wir hoffen du findest dich auf unseren Seiten
+gut zurecht. Falls du Fragen bzw. Anregungen an die Fachschaft richten möchtest, hier ist unsere E-Mail-Adresse:
+fsmpi@uni-bayreuth.de Alle aktuellen Informationen, Veranstaltungsankündigungen und fakultätsinterne
+Stellenausschreibungen findest du unter News.
+EOT;
+
+    if(get_page_by_title('Home') == NULL || get_page_by_title('Home')->post_status == 'trash') {
+        $id = wp_insert_post(array(
+            'post_title'     => 'Home',
+            'post_name'      => 'Home',
+            'post_content'   => '',
+            'post_status'    => 'publish',
+            'post_author'    => '1', // or "1" (super-admin?)
+            'post_type'      => 'page',
+            'menu_order'     => 1,
+            'comment_status' => 'closed',
+            'ping_status'    => 'closed',
+            'post_content'   => $content
+        ));
+
+        if($id == 0 || $id instanceof WP_Error) {
+            echo '<script>alert("Fehler: '.$id.'");</script>';
+        } else {
+
+            // Set this Site as default Fron-Page
+            update_option( 'page_on_front', $id );
+
+            // Set static Page as default Option for the Front-Page
+            update_option( 'show_on_front', 'page' );
+        }
+    }
+
+
+    // Generate News-Page and set is as default Blog-Page
+    // --------------------------------------------------
+    if(get_page_by_title('News') == NULL || get_page_by_title('News')->post_status == 'trash') {
+        $id = wp_insert_post(array(
+            'post_title'     => 'News',
+            'post_name'      => 'News',
+            'post_content'   => '',
+            'post_status'    => 'publish',
+            'post_author'    => '1', // or "1" (super-admin?)
+            'post_type'      => 'page',
+            'menu_order'     => 1,
+            'comment_status' => 'closed',
+            'ping_status'    => 'closed'
+        ));
+
+        if($id == 0 || $id instanceof WP_Error) {
+            echo '<script>alert("Fehler: '.$id.'");</script>';
+        } else {
+
+            // Set this Site as default Blog page
+            update_option( 'page_for_posts ', $id );
+        }
+    }
+
 
 
 }
