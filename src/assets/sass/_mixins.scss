@@ -23,6 +23,10 @@
   }
 }
 
+@mixin fluid-type($minscreen, $max-screen, $min-font, $max-font) {
+  font-size: calc($min-font + ($max-font - $min-font) * (100vw - $min-screen) / ($max-screen - $min-screen));
+}
+
 
 /*
 $break-desktop: 1281px;
