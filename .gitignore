@@ -1,3 +1,4 @@
 mysql/
 .idea/
 *.map
+.env

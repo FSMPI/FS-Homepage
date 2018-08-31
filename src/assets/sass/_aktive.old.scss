@@ -1,0 +1,93 @@
+$break-desktop: 1281px;
+$break-tablet-landscape: 1024px;
+$break-tablet-portrait: 768px;
+$break-phone-landscape: 823px;
+$break-phone-portrait: 414px;
+
+#content-aktive {
+
+  .mdc-layout-grid {
+    padding-top: 25px;
+  }
+  .mdc-card {
+    margin: 0;
+
+    display: flex;
+    //display: -webkit-box;
+    display: -ms-flexbox;
+    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    background-color: rgb(238, 238, 238);
+    //width: 475px;
+    //height: 336px;
+
+    @include respond-to(phone-portrait) {
+      flex-direction: column;
+    }
+    @include respond-to(phone-landscape) {
+      flex-direction: row;
+    }
+    @include respond-to(tablet-portrait) {
+      flex-direction: row;
+    }
+    @include respond-to(tablet-landscape) {
+      flex-direction: row;
+    }
+    @include respond-to(ipad-pro) {
+      flex-direction: row;
+    }
+    @include respond-to(desktop) {
+      flex-direction: row;
+    }
+
+  }
+  .mdc-card__media {
+    display: flex;
+    display: -ms-flexbox;
+    justify-content: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    margin: auto;
+    background-color: map-get($colors, 'primary');
+    margin: 0 !important;
+    flex-direction: column;
+    justify-content: flex-start;
+    color: white;
+
+    .portrait {
+      background-color: white;
+    }
+  }
+  .mdc-card__actions {
+    flex-direction: column;
+    padding: 15px 25px 15px 25px;
+    width: 100%;
+    height: 100%;
+    align-items: start;
+    display: block;
+
+    ul, h3 {
+      background-color: white;
+      margin: 0;
+      padding: 1em;
+      li {
+        padding: 0;
+      }
+    }
+
+    h3 {
+      padding-top: 0;
+    }
+
+
+    .material-icons {
+      margin-right: 16px;
+      color: map-get($colors, 'primary');
+    }
+  }
+}
