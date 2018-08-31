@@ -1,4 +1,4 @@
-<style>
+<!--style>
     .mdc-layout-grid__cell {
         margin: 0 !important;
     }
@@ -14,15 +14,11 @@
     .mdc-typography--subheading2 {
         margin: 0 auto 15px auto;
     }
-</style>
+</style-->
 
 <?php
     $jobs = empty(get_option( 'jobs' )) ? array('Chef', 'Vize', 'Finanzer', 'Öffentlichkeitsarbeit', 'Skripten', 'Uni-Kino 1', 'Uni-Kino 2', 'Grafiken', 'Einkauf', 'Root') :  get_option( 'jobs' );
 ?>
-
-
-<div class="mdc-layout-grid">
-    <div class="mdc-layout-grid__inner">
 
         <?php foreach($jobs as $job){
 
@@ -33,11 +29,10 @@
 
 
             echo <<<EOT
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-6-desktop">
             <div class="mdc-card">
                 <div class="mdc-card__media">
                     <img src="$picture" class="portrait"/>
-                    <h2 class="mdc-typography--subheading2">$first_name $last_name</h2>
+                    <h2 class="mdc-typography--subheading">$first_name $last_name</h2>
                 </div>
                 <div class="mdc-card__actions mdc-list-group">
                     <ul class="mdc-list mdc-list--two-line" aria-orientation="vertical">
@@ -68,11 +63,7 @@
                     </ul>
                 </div>
             </div>
-        </div>      
 EOT;
 
         }
         ?>
-
-    </div>
-</div>

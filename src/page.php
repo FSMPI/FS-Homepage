@@ -11,3 +11,7 @@ endif;
 echo 'This is an empty Page';
 
 ?>
+
+
+
+<?php get_footer(); ?>

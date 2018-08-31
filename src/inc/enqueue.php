@@ -49,6 +49,7 @@ function fs_load_scripts(){
     wp_scripts()->add_data( 'jquery-migrate', 'group', 1 );
 
     wp_enqueue_script('jquery-ui', get_template_directory_uri() . '/assets/js/jquery-ui.js');
+    wp_scripts()->add_data('jquery-ui', 'group', 1);
 
     wp_enqueue_script('scrollTo', get_template_directory_uri() . '/assets/js/jquery.scrollTo.js' );
     wp_scripts()->add_data('scrollTo', 'group', 1);

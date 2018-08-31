@@ -20,7 +20,7 @@ function fs_add_admin_page() {
     add_submenu_page( 'fs', 'FS Job Settings', 'Fachschaftler', 'manage_options', 'fs_jobs', 'fs_theme_job_page');
     //add_submenu_page( 'fs', 'FS Uni-Kino Settings', 'Uni-Kino', 'manage_options', 'fs_uk', 'fs_theme_uk_page');
     //add_submenu_page( 'fs', 'FS Physikerbar Settings', 'Physikerbar', 'manage_options', 'fs_phybar', 'fs_theme_phybar_page');
-    add_submenu_page( 'fs', 'FS Theme Setup', 'Setup', 'manage_options', 'fs_setup', 'fs_theme_setup_page');
+    //add_submenu_page( 'fs', 'FS Theme Setup', 'Setup', 'manage_options', 'fs_setup', 'fs_theme_setup_page');
 
 }
 add_action( 'admin_menu', 'fs_add_admin_page' );
@@ -67,35 +67,53 @@ function fs_custom_settings() {
     // Sprechstunden
     //TODO: Implement Office Hours
 
-    register_setting('fs-settings-officehours-days', 'fs_general_officehours_days');
-    register_setting('fs-settings-officehours-times', 'fs_general_officehours_times');
-    register_setting('fs-settings-officehours', 'fs_general_officehours');
-
+    register_setting('fs-settings-general', 'officehours');
     add_settings_section('fs-general-officehours', 'Sprechstunden', 'fs_general_officehours', 'fs');
-
-    add_settings_field('fs_general_officehours_days', 'Wochentage', function(){
-        $options = empty(get_option( 'fs_general_officehours_days' )) ? array('Montag'=>1, 'Dienstag'=>1, 'Mittwoch'=>1, 'Donnerstag'=>1, 'Freitag'=>1) : get_option( 'fs_general_officehours_days' );
-        $days = array( 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag');
-        $output = '';
-        foreach ( $days as $day ){
-            $checked = ( @$options[$day] == 1 ? 'checked' : '' );
-            $output .= '<div class="fs-officehours-days"><label><input type="checkbox" id="'.$day.'" name="fs_general_officehours_days['.$day.']" value="1" '.$checked.' /> '.$day.'</label></div>';
+    add_settings_field('general-officehours', '', function(){
+        $officehours = empty(get_option( 'officehours' )) ? array('13.00' => array('Montag' => '', 'Dienstag' => '', 'Mittwoch' => '', 'Donnerstag' => ''), '14.00' => array('Montag' => '', 'Dienstag' => '', 'Mittwoch' => '', 'Donnerstag' => ''), '15.00' => array('Montag' => '', 'Dienstag' => '', 'Mittwoch' => '', 'Donnerstag' => '')) : get_option( 'officehours' );
+        $jobs = empty(get_option( 'jobs' )) ? array('Chef', 'Vize', 'Finanzer', 'Öffentlichkeitsarbeit', 'Skripten', 'Uni-Kino 1', 'Uni-Kino 2', 'Grafiken', 'Einkauf', 'Root') :  get_option( 'jobs' );
+        $names = array();
+        foreach($jobs as $job) {
+            $option = get_option($job);
+            (isset($option['first_name']) && $option['first_name'] != '') ? array_push($names, $option['first_name']) : 'NOP';
         }
-        echo $output;
+
+        echo '<div class="fs-hours"><table><tbody><tr><th></th><th>Mo</th><th>Di</th><th>Mi</th><th>Do</th></tr>';
+
+        foreach($officehours as $hour => $days) {
+            echo '<tr><td>'.$hour.'</td>';
+            foreach($days as $day => $dname) {
+                echo '<td><select name="officehours['.$hour.']['.$day.']">';
+                foreach($names as $name) {
+                    echo '<option value="'.$name.'"';
+                    if($name == $dname) echo ' selected';
+                    echo '>'.$name.'</option>';
+                }
+                echo '</select></td>';
+            }
+            echo '</tr>';
+        }
+
+
+        echo '</tbody></table></div>';
+        echo '<div class="delimiter"></div>';
     }, 'fs', 'fs-general-officehours');
 
-    add_settings_field('fs_general_officehours_times', 'Uhrzeiten', function(){
-        echo '<textarea name="fs_general_jobs" rows="10" cols="50">';
-        echo '</textarea>';
-    }, 'fs', 'fs-general-officehours');
-
-
-    add_settings_field('fs_general_offichours', '', function(){
-        echo '<div class="fs-hours"><table><tbody><tr><th></th><th>Mo</th><th>Di</th><th>Mi</th><th>Do</th></tr><tr><th>13.00</th><td>Max</td><td>Max</td><td>Max</td><td>Max</td></tr></tbody></table></div>';
-    }, 'fs', 'fs-general-officehours');
 
     // Keine Panik
-    //TODO: Add Section "Keine Panik"
+
+    register_setting('fs-settings-general', 'panik');
+    add_settings_section('fs-general-panik', 'Keine Panik', 'fs_general_panik', 'fs');
+    add_settings_field('fs_general_panik', 'Keine Panik', function(){
+        $panik = empty(get_option('panik')) ? '' : esc_attr( get_option('panik'));
+        echo '<div class="fs-panik-preview" id="panik-preview"><iframe src="https://docs.google.com/viewer?url='.$panik.'&embedded=true" frameborder="0"></iframe></div>';
+        if(empty($panik)){
+            echo '<div><input type="button" class="button button-secondary" value="Panik hochladen" id="panik-select" name="uploadBtn"><input type="hidden" id="panik-picture" name="panik" value="'.$panik.'" /></div>';
+        } else {
+            echo '<div><input type="button" class="button button-secondary" value="Panik ändern" id="panik-select" name="uploadBtn"><input type="button" class="button button-secondary" value="Entfernen" id="panik-remove" name="removeBtn"><input type="hidden" id="panik-picture-preview" name="panik" value="'.$panik.'" /></div>';
+        }
+        echo '<div class="delimiter"></div>';
+    }, 'fs', 'fs-general-panik');
 
 
 
@@ -151,11 +169,6 @@ function fs_custom_settings() {
     }
 
 
-    // -------------
-    // Theme Setup
-    // -------------
-
-    add_settings_section('fs-general-setup', 'Setup', 'fs_general_setup', 'fs');
 
 }
 add_action('admin_init', 'fs_custom_settings' );
@@ -189,9 +202,6 @@ function fs_general_panik() {
 }
 function fs_general_officehours() {
     echo '<p>Hier können die aktuellen Sprechstunden eingetragen werden</p>';
-}
-function fs_general_setup() {
-    echo '<p>Hier Setup undso...</p>';
 }
 
 function fs_custom_css_section_callback() {

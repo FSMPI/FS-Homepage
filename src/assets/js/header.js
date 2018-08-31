@@ -85,7 +85,7 @@ $(document).ready(function() {
     var arrow = $("#arrow");
     //var text = document.querySelector("#inv");
     var text = $("#inv");
-    var toolbar = mdc.toolbar.MDCToolbar.attachTo(document.querySelector(".mdc-toolbar"));
+    var toolbar = mdc.toolbar.MDCToolbar.attachTo(document.querySelector("#header"));
 
     //var leftMarginLogo = parseInt(getStyle(myFlexibleHeaderLogo, 'margin-left').replace('px', ''));
     //var leftMarginLogo = parseInt(myFlexibleHeaderLogo.css('marginLeft').replace('px', ''));
@@ -127,7 +127,7 @@ $(document).ready(function() {
 });*/
 
 $('#scrolldown').click(function() {
-    $.scrollTo('#content', 800);
+    $.scrollTo('#content-front-page', 800);
 });
 
 $('#menuBtn').click(function() {

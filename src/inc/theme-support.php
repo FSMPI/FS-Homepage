@@ -35,7 +35,7 @@ function fs_register_nav_menu() {
         wp_update_nav_menu_item($menu_id, 0, array(
                 'menu-item-title' => 'News',
                 'menu-item-object-id' => get_page_by_title('News')->ID,
-                'menu-item-classes' => 'account_circle',
+                'menu-item-classes' => 'line_style',
                 'menu-item-object' => 'page',
                 'menu-item-status' => 'publish',
                 'menu-item-type' => 'post_type')
@@ -44,7 +44,16 @@ function fs_register_nav_menu() {
         wp_update_nav_menu_item($menu_id, 0, array(
                 'menu-item-title' => 'Aktive Vertreter',
                 'menu-item-object-id' => get_page_by_title('Aktive Vertreter')->ID,
-                'menu-item-classes' => 'account_circle',
+                'menu-item-classes' => 'face',
+                'menu-item-object' => 'page',
+                'menu-item-status' => 'publish',
+                'menu-item-type' => 'post_type')
+        );
+
+        wp_update_nav_menu_item($menu_id, 0, array(
+                'menu-item-title' => 'Keine Panik',
+                'menu-item-object-id' => get_page_by_title('Keine Panik')->ID,
+                'menu-item-classes' => 'help',
                 'menu-item-object' => 'page',
                 'menu-item-status' => 'publish',
                 'menu-item-type' => 'post_type')
@@ -52,7 +61,7 @@ function fs_register_nav_menu() {
 
         wp_update_nav_menu_item($menu_id, 0, array(
             'menu-item-title' =>  __('Login'),
-            'menu-item-classes' => 'account_circle',
+            'menu-item-classes' => 'fingerprint',
             'menu-item-url' => home_url( '/wp-admin'),
             'menu-item-status' => 'publish',
             'menu-item-type' => 'custom')
@@ -66,20 +75,20 @@ function fs_register_nav_menu() {
     }
 
 }
-add_action('init', 'fs_register_nav_menu');
+
 
 
 function fs_register_default_pages() {
 
-    $menu = get_term_by('name', 'Header Menu', 'nav_menu')->term_id;
+    //$menu = get_term_by('name', 'Header Menu', 'nav_menu')->term_id;
     //var_dump($menu);
 
 
     // Set Permalink to /%year%/%monthnum%/%postname%/
     // -------------------------------------------------
-    if(get_option('permalink_structure') != '/%year%/%monthnum%/%postname%/') {
+    if(get_option('permalink_structure') != '/%postname%/') {
         global $wp_rewrite;
-        $wp_rewrite->set_permalink_structure('/%year%/%monthnum%/%postname%/');
+        $wp_rewrite->set_permalink_structure('/%postname%/');
         update_option( "rewrite_rules", FALSE );
         $wp_rewrite->flush_rules( true );
     }
@@ -102,7 +111,6 @@ EOT;
             'post_status'    => 'publish',
             'post_author'    => '1', // or "1" (super-admin?)
             'post_type'      => 'page',
-            'menu_order'     => 1,
             'comment_status' => 'closed',
             'ping_status'    => 'closed',
             'post_content'   => $content
@@ -121,8 +129,35 @@ EOT;
     }
 
 
-    // Generate News-Page and set is as default Blog-Page
+    // Generate Page for Panik
     // --------------------------------------------------
+    $content = <<<EOT
+HelloWorld
+EOT;
+
+    if(get_page_by_title('Keine Panik') == NULL || get_page_by_title('Keine Panik')->post_status == 'trash') {
+        $id = wp_insert_post(array(
+            'post_title'     => 'Keine Panik',
+            'post_name'      => 'Keine Panik',
+            'post_content'   => '',
+            'post_status'    => 'publish',
+            'post_author'    => '1', // or "1" (super-admin?)
+            'post_type'      => 'page',
+            'comment_status' => 'closed',
+            'ping_status'    => 'closed',
+            'post_content'   => $content
+        ));
+
+        if($id == 0 || $id instanceof WP_Error) {
+            echo '<script>alert("Fehler: '.$id.'");</script>';
+        } else {
+
+        }
+    }
+
+
+    // Generate News Page
+    // ------------------------------
     if(get_page_by_title('News') == NULL || get_page_by_title('News')->post_status == 'trash') {
         $id = wp_insert_post(array(
             'post_title'     => 'News',
@@ -131,7 +166,6 @@ EOT;
             'post_status'    => 'publish',
             'post_author'    => '1', // or "1" (super-admin?)
             'post_type'      => 'page',
-            'menu_order'     => 1,
             'comment_status' => 'closed',
             'ping_status'    => 'closed'
         ));
@@ -139,10 +173,8 @@ EOT;
         if($id == 0 || $id instanceof WP_Error) {
             echo '<script>alert("Fehler: '.$id.'");</script>';
         } else {
-
             // Set this Site as default Blog page
             update_option( 'page_for_posts ', $id );
-
         }
     }
 
@@ -165,13 +197,22 @@ EOT;
         if($id == 0 || $id instanceof WP_Error) {
             echo '<script>alert("Fehler: '.$id.'");</script>';
         } else {
-
+            // Set this Site as default Blog page
+            //update_option( 'page_for_posts ', $id );
         }
     }
 
 
 }
 add_action('init', 'fs_register_default_pages');
+add_action('init', 'fs_register_nav_menu');
+
+function twentyseventeen_setup() {
+    add_theme_support( 'post-formats', array(
+        'aside'
+    ) );
+}
+add_action( 'after_setup_theme', 'twentyseventeen_setup' );
 
 
 /*

@@ -17,6 +17,7 @@
     <?php endif; ?>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <?php wp_head(); ?>
@@ -56,8 +57,8 @@
 </aside>
 
 
-<header id="header" class="mdc-toolbar mdc-toolbar--fixed">
-    <div class="mdc-toolbar__row mdc-toolbar__row-default">
+<header id="header-mobile" class="mdc-toolbar mdc-toolbar--fixed ">
+    <div class="mdc-toolbar__row">
         <section class="mdc-toolbar__section logo_section mdc-toolbar__section--align-start">
             <a href="<?php get_home_url(); ?>"><div id="logo" class="mdc-toolbar__logo" style="background-image: url('<?php bloginfo('template_url') ?>/assets/img/tross.svg'); background-size: contain; background-repeat: no-repeat;">
 
@@ -65,7 +66,7 @@
             <span class="mdc-toolbar__title">Fachschaft MPI</span>
         </section>
 
-        <section class="mdc-toolbar__section menu_section" id="menu_section_mobile">
+        <section class="mdc-toolbar__section menu_section mdc-toolbar__section--align-end" id="menu_section_mobile">
             <button id="menuBtn" class="menu_element mdc-button"><i class="material-icons md-18 mdc-button__icon">menu</i></button>
         </section>
     </div>

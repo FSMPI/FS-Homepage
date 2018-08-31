@@ -1,6 +1,11 @@
 /*
  *  -- Mixins
  */
+$break-desktop: 1281px;
+$break-tablet-landscape: 1024px;
+$break-tablet-portrait: 768px;
+$break-phone-landscape: 823px;
+$break-phone-portrait: 414px;
 
 @mixin respond-to($media) {
   @if $media == desktop {
@@ -23,7 +28,8 @@
   }
 }
 
-@mixin fluid-type($minscreen, $max-screen, $min-font, $max-font) {
+
+@mixin fluid-type($min-screen, $max-screen, $min-font, $max-font) {
   font-size: calc($min-font + ($max-font - $min-font) * (100vw - $min-screen) / ($max-screen - $min-screen));
 }
 

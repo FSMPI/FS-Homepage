@@ -18,31 +18,17 @@ The Stack includes the following (official) images:
 
 3. Clone this Repository
 
-4. Run ```docker-compose up -d```
+4. Change Login Credentials in th .env.example File and rename it to .env
 
-5. Optional: Run ```docker-compose logs -f``` to watch when the Containers are ready (Generating the Diffie-Hellman Parameter may take a few minutes)
+5. Run ```docker-compose up -d```
 
-6. Run ```docker logs Homepage_Database 2>&1 | grep "GENERATED ROOT PASSWORD"``` and copy the Password
+6. Optional: Run ```docker-compose logs -f``` to watch when the Containers are ready (Generating the Diffie-Hellman Parameter may take a few minutes)
 
-7. Open fsmpi.uni-bayreuth.de in a Browser
+7. Check if the Website works correctly
 
-8. Install Wordpress with the following Configuration:
+8. Run ```docker-compose down``` and within the .env File switch the STAGE Environment Variable from 'local' to 'production'
 
-   **Database-Name**		wordpress
-
-   **Username**			root
-
-   **Password** 			 *[The copied Password from before]*
-
-   **Database-Host**		mysql
-
-   **Table-Prefix**			wp_
-
-9. Check if the Website works correctly
-
-10. Run ```docker-compose down``` and within the https-portal service in the docker-compose.yml switch the STAGE Environment Variable from 'local' to 'production'
-
-11. Run ```docker-compose up -d``` again; Now the Lets Enrypt Certs should be installed
+9. Run ```docker-compose up -d``` again; Now the Lets Enrypt Certs should be installed
 
 
 
