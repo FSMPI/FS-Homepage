@@ -1,1 +1,116 @@
 @import "colors";
+@import "animations";
+@import "mixins";
+@import "header";
+@import "frontpage";
+@import "post";
+@import "aktive";
+@import "panik";
+
+
+/*
+ *  -- Theme Options
+ */
+:root {
+
+
+
+  @each $name, $color in $colors {
+    --mdc-theme-#{$name}: #{$color};
+  }
+
+  /*
+  --mdc-theme-primary: $mdc-theme-primary;
+  --mdc-theme-secondary: $mdc-theme-secondary;
+  --mdc-theme-background: $mdc-theme-background;
+*/
+  /*
+  --mdc-theme-primary-light: ;
+  --mdc-theme-primary-dark: ;
+
+  --mdc-theme-secondary-light: ;
+  --mdc-theme-secondary-dark: ;
+
+  --mdc-theme-text-primary-on-background: ;
+  --mdc-theme-text-primary-on-dark: ;
+  --mdc-theme-text-primary-on-light: ;
+  --mdc-theme-text-secondary-on-background: ;
+  --mdc-theme-text-secondary-on-dark: ;
+  --mdc-theme-text-secondary-on-light: ;
+  --mdc-theme-text-hint-on-background: ;
+  --mdc-theme-text-hint-on-dark: ;
+  --mdc-theme-text-hint-on-light: ;
+  --mdc-theme-text-disabled-on-background: ;
+  --mdc-theme-text-disabled-on-dark: ;
+  --mdc-theme-text-disabled-on-light: ;
+  --mdc-theme-text-icon-on-background: ;
+  --mdc-theme-text-icon-on-dark: ;
+  --mdc-theme-text-icon-on-light: ;
+  */
+
+
+  .mdc-typography, .mdc-typography--body1, .mdc-typography--headline, .mdc-typography--subheading {
+    font-family: 'Montserrat', sans-serif !important;
+  }
+  .mdc-button span {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+}
+
+
+
+
+
+@media screen and (min-width: 715px) {
+
+}
+
+
+
+/*
+ *  -- Global Styles
+ */
+html {
+  @include fluid-type(1.2em, 1.44em, 320px, 1280px);
+}
+
+i {
+  display: block;
+}
+
+
+body {
+  height: 100%;
+  margin: 0;
+
+  .background{
+    background-image: url("../img/bg-content.png");
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center center;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+  }
+
+  .background-unikino {
+    background-color: #000000;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+  }
+}
+
+
+

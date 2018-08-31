@@ -1,0 +1,65 @@
+:root #content-blog {
+  --main-content-padding: 1px 0 0 0;
+  --main-content-margin: 57px 0 0 0;
+  --main-content-display: block;
+  --main-content-height: calc(100vh - 65px);
+  --card-background: rgba(255, 255, 255, 0.25);
+  --card-margin: 2em 2em 2em 2em;
+  --card-main-content-padding: 10px;
+}
+
+@media screen and (min-width: 784px) {
+  :root #content-blog {
+    --main-content-display: flex;
+    --card-margin: 2em auto 2em auto;
+    --card-width: 700px;
+    flex-direction: column;
+  }
+}
+
+
+
+#content-blog {
+
+  &.mdc-toolbar-fixed-adjust {
+    display: var(--main-content-display);
+    margin: var(--main-content-margin);
+    padding: var(--main-content-padding);
+    height: var(--main-content-height);
+  }
+
+
+  .mdc-card{
+    background-color: var(--card-background);
+    margin: var(--card-margin);
+    width: var(--card-width);
+
+    .mdc-card__media {
+      height: 100%;
+    }
+
+    .mdc-card__main-content {
+
+      h1, p {
+        padding: 10px;
+        margin: 0;
+      }
+
+      h1, small {
+        background-color: var(--mdc-theme-primary);
+      }
+
+      small {
+        display:block;
+        padding: 0 10px 10px 10px;
+        color: #3a3e41;
+      }
+    }
+
+    .mdc-card__actions {
+      .mdc-card__action-buttons {
+        margin: auto;
+      }
+    }
+  }
+}

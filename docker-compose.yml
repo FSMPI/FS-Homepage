@@ -21,7 +21,8 @@ services:
       # FORCE_RENEW: 'true'
 
   wordpress:
-    image: wordpress
+    build:
+      context: ./Dockerfiles/Homepage/
     container_name: Homepage
     links:
       - database:mysql
@@ -29,19 +30,20 @@ services:
       - 8080:80
     volumes:
       - ./src:/var/www/html/wp-content/themes/fstheme
-      - ./configs/wp-config-sample.php:/var/www/html/wp-config-sample.php
     depends_on:
       - database
     restart: unless-stopped
+    env_file:
+      - ./.env
 
   database:
-    image: mariadb
+    build:
+      context: ./Dockerfiles/Database/
     container_name: Homepage_Database
     volumes:
       - ./mysql:/var/lib/mysql
-    environment:
-      - MYSQL_RANDOM_ROOT_PASSWORD=yes
-      - MYSQL_DATABASE=wordpress
+    env_file:
+      - ./.env
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -53,6 +55,5 @@ services:
     depends_on:
     - database
     restart: unless-stopped
-    environment:
-      MYSQL_USERNAME: root
-      MYSQL_ROOT_PASSWORD: example
+    env_file:
+      - ./.env
