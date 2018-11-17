@@ -168,10 +168,10 @@ EOT;
     // Generate Page for Livestream
     // --------------------------------------------------
 
-    if(get_page_by_title('Keine Panik') == NULL || get_page_by_title('Keine Panik')->post_status == 'trash') {
+    if(get_page_by_title('Livestream') == NULL || get_page_by_title('Livestream')->post_status == 'trash') {
         $id = wp_insert_post(array(
-            'post_title'     => 'Keine Panik',
-            'post_name'      => 'Keine Panik',
+            'post_title'     => 'Livestream',
+            'post_name'      => 'Livestream',
             'post_content'   => '',
             'post_status'    => 'publish',
             'post_author'    => '1', // or "1" (super-admin?)
