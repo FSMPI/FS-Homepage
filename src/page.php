@@ -8,7 +8,7 @@ else:
     get_header();
 endif;
 
-echo 'This is an empty Page';
+echo $post->post_content;
 
 ?>
 
