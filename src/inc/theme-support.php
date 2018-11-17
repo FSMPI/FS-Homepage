@@ -167,6 +167,9 @@ EOT;
 
     // Generate Page for Livestream
     // --------------------------------------------------
+    $content = <<<EOT
+HelloWorld
+EOT;
 
     if(get_page_by_title('Livestream') == NULL || get_page_by_title('Livestream')->post_status == 'trash') {
         $id = wp_insert_post(array(
@@ -178,7 +181,7 @@ EOT;
             'post_type'      => 'page',
             'comment_status' => 'closed',
             'ping_status'    => 'closed',
-            'post_content'   => ''
+            'post_content'   => $content
         ));
 
         if($id == 0 || $id instanceof WP_Error) {
