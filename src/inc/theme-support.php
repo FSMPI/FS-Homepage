@@ -60,6 +60,15 @@ function fs_register_nav_menu() {
         );
 
         wp_update_nav_menu_item($menu_id, 0, array(
+                'menu-item-title' => 'Livestream',
+                'menu-item-object-id' => get_page_by_title('Livestream')->ID,
+                'menu-item-classes' => 'help',
+                'menu-item-object' => 'page',
+                'menu-item-status' => 'publish',
+                'menu-item-type' => 'post_type')
+        );
+
+        wp_update_nav_menu_item($menu_id, 0, array(
             'menu-item-title' =>  __('Login'),
             'menu-item-classes' => 'fingerprint',
             'menu-item-url' => home_url( '/wp-admin'),
@@ -146,6 +155,30 @@ EOT;
             'comment_status' => 'closed',
             'ping_status'    => 'closed',
             'post_content'   => $content
+        ));
+
+        if($id == 0 || $id instanceof WP_Error) {
+            echo '<script>alert("Fehler: '.$id.'");</script>';
+        } else {
+
+        }
+    }
+
+
+    // Generate Page for Livestream
+    // --------------------------------------------------
+
+    if(get_page_by_title('Keine Panik') == NULL || get_page_by_title('Keine Panik')->post_status == 'trash') {
+        $id = wp_insert_post(array(
+            'post_title'     => 'Keine Panik',
+            'post_name'      => 'Keine Panik',
+            'post_content'   => '',
+            'post_status'    => 'publish',
+            'post_author'    => '1', // or "1" (super-admin?)
+            'post_type'      => 'page',
+            'comment_status' => 'closed',
+            'ping_status'    => 'closed',
+            'post_content'   => ''
         ));
 
         if($id == 0 || $id instanceof WP_Error) {

@@ -1,0 +1,67 @@
+:root #content-live {
+  --main-content-padding: 1px 0 0 0;
+  --main-content-margin: 57px 0 0 0;
+  --main-content-display: block;
+  --main-content-height: calc(100vh - 65px);
+  --card-margin: 2em 2em 2em 2em;
+  --card-background: rgba(255, 255, 255, 0.25);
+  --card-width: auto;
+  --content-margin: 10px;
+}
+
+
+@media screen and (min-width: 464px) {
+  :root #content-live {
+    --main-content-display: flex;
+    --card-margin: 2em auto 2em auto;
+    --card-width: 400px;
+    flex-direction: column;
+  }
+}
+
+@media screen and (min-width: 880px) {
+  :root #content-live {
+    --main-content-display: grid;
+    --main-content-height: calc(100vh - 65px);
+    --card-margin: 0 2em 0 2em;
+    --card-width: unset;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas: "." "stream" ".";
+  }
+}
+
+@media screen and (min-width: 1152px) {
+  :root #content-live {
+    --card-width: 512px;
+    --card-margin: 0 2em 0 2em;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+            ". . ."
+            ". stream ."
+            ". . .";
+  }
+}
+
+
+#content-live {
+  &.mdc-toolbar-fixed-adjust {
+    display: var(--main-content-display);
+    margin: var(--main-content-margin);
+    padding: var(--main-content-padding);
+    height: var(--main-content-height);
+  }
+
+  .mdc-card {
+    margin: var(--card-margin);
+    background: var(--card-background);
+    width: var(--card-width);
+
+    video {
+      height: 264px;
+      width: 640px;
+    }
+
+  }
+}
